@@ -1,5 +1,6 @@
 package com.example.produktapi.service;
 
+import com.example.produktapi.exception.BadRequestException;
 import com.example.produktapi.exception.EntityNotFoundException;
 import com.example.produktapi.model.Product;
 import com.example.produktapi.repository.ProductRepository;
@@ -70,6 +71,38 @@ class ProductServiceTest {
             productService.getProductById(1);
         });
     }
+    @Test
+    void addProduct_ProductDoesNotExist_SavesProduct() {
+        // Arrange
+        when(productRepository.findByTitle(any())).thenReturn(Optional.empty());
+
+        Product newProduct = new Product("2", 200.0, "jewellery", "New Title", "image");
+        when(productRepository.save(any(Product.class))).thenReturn(newProduct);
+
+        // Act
+        Product savedProduct = productService.addProduct(newProduct);
+
+        // Assert
+        assertNotNull(savedProduct);
+        assertEquals("2", savedProduct.getTitle());
+        assertEquals(200.0, savedProduct.getPrice());
+    }
+    @Test
+    void addProduct_ProductAlreadyExists_ThrowsBadRequestException() {
+        // Arrange
+        Product existingProduct = new Product("1", 100.0, "jewellery", "Existing Title", "image");
+        when(productRepository.findByTitle(any())).thenReturn(Optional.of(existingProduct));
+
+        Product newProduct = new Product("2", 200.0, "jewellery", "Existing Title", "image");
+
+        // Act & Assert
+        BadRequestException exception = assertThrows(BadRequestException.class, () -> {
+            productService.addProduct(newProduct);
+        });
+
+        assertEquals("En produkt med titeln: 2 finns redan", exception.getMessage());
+    }
 }
+
 
 
