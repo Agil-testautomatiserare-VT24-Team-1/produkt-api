@@ -44,5 +44,12 @@ public class ProductTest {
 
         assertNull(actualId, "The ID should be null when it is not set");
     }
+
+    @Test
+    void getTitle(){
+        Product product = new Product();
+        product.setTitle("Product title");
+        assertEquals(product.getTitle(), "Product title");
+    }
 }
 
