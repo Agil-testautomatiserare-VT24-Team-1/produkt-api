@@ -64,6 +64,14 @@ public class ProductTest {
         Assertions.assertEquals(expectedImage, actualImage);
     }
 
-
+    @Test
+    void getImage_ReturnsCorrectImage() {
+        Product product = new Product();
+        assertNull(product.getImage(), "The image should be null when it is not set");
+        String expectedImage = "image.jpg";
+        product.setImage(expectedImage);
+        String actualImage = product.getImage();
+        Assertions.assertEquals(expectedImage, actualImage);
+    }
 }
 
