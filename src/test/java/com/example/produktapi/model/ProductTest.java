@@ -1,6 +1,7 @@
 package com.example.produktapi.model;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +21,7 @@ public class ProductTest {
     @Test
     void getAllProducts() {
     }
+
     @Test
     void getId_ReturnsCorrectId() {
 
@@ -33,6 +35,7 @@ public class ProductTest {
 
         assertEquals(expectedId, actualId);
     }
+
     @Test
     void getId_ReturnsNullWhenIdNotSet() {
 
@@ -46,10 +49,21 @@ public class ProductTest {
     }
 
     @Test
-    void getTitle(){
+    void getTitle() {
         Product product = new Product();
         product.setTitle("Product title");
         assertEquals(product.getTitle(), "Product title");
     }
+
+    @Test
+    void setImage_SetsCorrectImage() {
+        Product product = new Product();
+        String expectedImage = "image.jpg";
+        product.setImage(expectedImage);
+        String actualImage = product.getImage();
+        Assertions.assertEquals(expectedImage, actualImage);
+    }
+
+
 }
 
