@@ -1,5 +1,6 @@
 package com.example.produktapi.model;
 
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,12 @@ public class ProductTest {
     }
 
     @Test
-    void getAllProducts() {
+    void setIdTest() {
+        Product theProduct = new Product();
+        int id = 1;
+        theProduct.setId(id);
+        int actualId = theProduct.getId();
+        Assertions.assertEquals(id, actualId);
     }
     @Test
     void getId_ReturnsCorrectId() {
