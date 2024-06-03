@@ -32,22 +32,14 @@ public class ProductTest {
         Product product = new Product();
         Integer expectedId = 1;
         product.setId(expectedId);
-
-
         Integer actualId = product.getId();
-
-
         assertEquals(expectedId, actualId);
     }
     @Test
     void getId_ReturnsNullWhenIdNotSet() {
 
         Product product = new Product();
-
-
         Integer actualId = product.getId();
-
-
         assertNull(actualId, "The ID should be null when it is not set");
     }
 
@@ -56,6 +48,22 @@ public class ProductTest {
         Product product = new Product();
         product.setTitle("Product title");
         assertEquals(product.getTitle(), "Product title");
+    }
+    @Test
+    void getCategoryReturnsCorrectCategory() {
+
+        String expectedCategory = "jewellery";
+        Product product = new Product();
+        product.setCategory(expectedCategory);
+        String actualCategory = product.getCategory();
+        assertEquals(expectedCategory, actualCategory );
+    }
+    @Test
+    void getCategoryReturnsNullWhenCategoryNotSet() {
+
+        Product product = new Product();
+        String actualCategory = product.getCategory();
+        assertNull(actualCategory, "The category should be null when it is not set");
     }
 }
 
