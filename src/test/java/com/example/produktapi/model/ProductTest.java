@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class ProductTest {
@@ -65,5 +66,29 @@ public class ProductTest {
         String actualCategory = product.getCategory();
         assertNull(actualCategory, "The category should be null when it is not set");
     }
+    @Test
+    public void testDefaultConstructor() {
+
+        Product product = new Product();
+        assertNotNull(product);
+    }
+
+    @Test
+    public void testParameterizedConstructor() {
+        // Arrange
+        String title = "Test Product";
+        Double price = 10.99;
+        String category = "Test Category";
+        String description = "Test Description";
+        String image = "test.jpg";
+        Product product = new Product(title, price, category, description, image);
+        assertNotNull(product);
+        assertEquals(title, product.getTitle());
+        assertEquals(price, product.getPrice());
+        assertEquals(category, product.getCategory());
+        assertEquals(description, product.getDescription());
+        assertEquals(image, product.getImage());
+    }
 }
+
 
