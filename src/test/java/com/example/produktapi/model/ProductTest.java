@@ -1,7 +1,12 @@
 package com.example.produktapi.model;
 
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class ProductTest {
 
@@ -11,7 +16,6 @@ public class ProductTest {
     void setUp() {
         product = new Product();
 
-      void setUp() {
     }
 
     @AfterEach
@@ -24,10 +28,10 @@ public class ProductTest {
         int id = 1;
         theProduct.setId(id);
         int actualId = theProduct.getId();
-        Assertions.assertEquals(id, actualId);
+        assertEquals(id, actualId);
     }
 
-      @Test
+    @Test
     void getId_ReturnsCorrectId() {
         Integer expectedId = 1;
         product.setId(expectedId);
@@ -71,7 +75,7 @@ public class ProductTest {
         String expectedDescription = "This is a product description";
         product.setDescription(expectedDescription);
         String actualDescription = product.getDescription();
-        Assertions.assertEquals(expectedDescription, actualDescription);
+        assertEquals(expectedDescription, actualDescription);
     }
 
     @Test
@@ -79,7 +83,6 @@ public class ProductTest {
         String expectedDescription = "This is a product description";
         product.setDescription(expectedDescription);
         String actualDescription = product.getDescription();
-        Assertions.assertEquals(expectedDescription, actualDescription);
+        assertEquals(expectedDescription, actualDescription);
     }
 }
-
