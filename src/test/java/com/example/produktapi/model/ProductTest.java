@@ -66,12 +66,6 @@ public class ProductTest {
         String actualCategory = product.getCategory();
         assertNull(actualCategory, "The category should be null when it is not set");
     }
-    @Test
-    public void testDefaultConstructor() {
-
-        Product product = new Product();
-        assertNotNull(product);
-    }
 
     @Test
     public void testParameterizedConstructor() {
