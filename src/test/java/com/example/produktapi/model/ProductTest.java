@@ -6,12 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductTest {
 
@@ -64,8 +59,9 @@ public class ProductTest {
         Product product = new Product();
         product.setCategory(expectedCategory);
         String actualCategory = product.getCategory();
-        assertEquals(expectedCategory, actualCategory );
+        assertEquals(expectedCategory, actualCategory);
     }
+
     @Test
     void getCategoryReturnsNullWhenCategoryNotSet() {
 
@@ -90,8 +86,8 @@ public class ProductTest {
         assertEquals(description, product.getDescription());
         assertEquals(image, product.getImage());
     }
-}
-@Test
+
+    @Test
     void setImage_SetsCorrectImage() {
         Product product = new Product();
         String expectedImage = "image.jpg";
@@ -109,6 +105,7 @@ public class ProductTest {
         String actualImage = product.getImage();
         Assertions.assertEquals(expectedImage, actualImage);
     }
+
     @Test
     void setPrice() {
         Double firstPrice = 12.34;
