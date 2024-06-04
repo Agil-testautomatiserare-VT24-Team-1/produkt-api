@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductTest {
 
@@ -42,6 +41,7 @@ public class ProductTest {
 
     @Test
     void getId_ReturnsNullWhenIdNotSet() {
+        Product product = new Product();
         Integer actualId = product.getId();
         assertNull(actualId, "The ID should be null when it is not set");
     }
@@ -52,7 +52,42 @@ public class ProductTest {
         assertEquals(product.getTitle(), "Product title");
     }
 
-@Test
+    @Test
+    void getCategoryReturnsCorrectCategory() {
+
+        String expectedCategory = "jewellery";
+        Product product = new Product();
+        product.setCategory(expectedCategory);
+        String actualCategory = product.getCategory();
+        assertEquals(expectedCategory, actualCategory);
+    }
+
+    @Test
+    void getCategoryReturnsNullWhenCategoryNotSet() {
+
+        Product product = new Product();
+        String actualCategory = product.getCategory();
+        assertNull(actualCategory, "The category should be null when it is not set");
+    }
+
+    @Test
+    public void testParameterizedConstructor() {
+        // Arrange
+        String title = "Test Product";
+        Double price = 10.99;
+        String category = "Test Category";
+        String description = "Test Description";
+        String image = "test.jpg";
+        Product product = new Product(title, price, category, description, image);
+        assertNotNull(product);
+        assertEquals(title, product.getTitle());
+        assertEquals(price, product.getPrice());
+        assertEquals(category, product.getCategory());
+        assertEquals(description, product.getDescription());
+        assertEquals(image, product.getImage());
+    }
+
+    @Test
     void setImage_SetsCorrectImage() {
         Product product = new Product();
         String expectedImage = "image.jpg";
@@ -70,6 +105,7 @@ public class ProductTest {
         String actualImage = product.getImage();
         Assertions.assertEquals(expectedImage, actualImage);
     }
+
     @Test
     void setPrice() {
         Double firstPrice = 12.34;
@@ -105,3 +141,4 @@ public class ProductTest {
         assertEquals(expectedDescription, actualDescription);
     }
 }
+
