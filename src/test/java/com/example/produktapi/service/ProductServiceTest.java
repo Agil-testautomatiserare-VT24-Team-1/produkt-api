@@ -120,6 +120,7 @@ class ProductServiceTest {
         // Assert
         assertEquals(expectedCategories, actualCategories);
     }
+
 }
 
 
