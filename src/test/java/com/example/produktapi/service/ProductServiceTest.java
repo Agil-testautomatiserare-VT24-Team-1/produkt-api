@@ -108,7 +108,6 @@ class ProductServiceTest {
         assertEquals("En produkt med titeln: 2 finns redan", exception.getMessage());
     }
 
-
     @Test
     void getAllCategories_ReturnsCorrectCategories() {
         // Arrange
