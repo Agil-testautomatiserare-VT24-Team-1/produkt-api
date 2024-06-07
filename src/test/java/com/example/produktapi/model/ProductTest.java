@@ -1,6 +1,7 @@
 package com.example.produktapi.model;
 
 
+import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,10 +47,26 @@ public class ProductTest {
         assertNull(actualId, "The ID should be null when it is not set");
     }
 
+    //David Galstyan
     @Test
-    void getTitle() {
-        product.setTitle("Product title");
-        assertEquals(product.getTitle(), "Product title");
+    void getTitle(){
+        product = new Product("Title", 33.33, "Category", "Description", "Image");
+        Assert.assertEquals(product.getTitle(), "Title");
+    }
+
+    //David Galstyan
+    @Test
+    void getTitleNull(){
+        String productTitle = null;
+        product.setTitle(productTitle);
+        assertNull(product.getTitle());
+    }
+    //David Galstyan
+    @Test
+    void setTitle() {
+        String productTitle = "Product title";
+        product.setTitle(productTitle);
+        assertEquals(product.getTitle(), productTitle);
     }
 
     @Test
