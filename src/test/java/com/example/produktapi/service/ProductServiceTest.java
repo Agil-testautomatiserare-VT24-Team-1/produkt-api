@@ -13,12 +13,14 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.*;
 
 class ProductServiceTest {
 
@@ -34,6 +36,7 @@ class ProductServiceTest {
     @BeforeEach
     void setUp() {
         closeable = MockitoAnnotations.openMocks(this);
+
     }
 
     @AfterEach
@@ -64,7 +67,7 @@ class ProductServiceTest {
     }
     @Test
     void getProductByIdNegative(){
-        Mockito.when(productRepository.findById(any())).thenReturn(Optional.empty());
+        when(productRepository.findById(any())).thenReturn(Optional.empty());
 
         // Asserting that getProductById() method throws EntityNotFoundException
         assertThrows(EntityNotFoundException.class, () -> {
@@ -101,6 +104,30 @@ class ProductServiceTest {
         });
 
         assertEquals("En produkt med titeln: 2 finns redan", exception.getMessage());
+    }
+
+    @Test
+    void testGetAllProducts() {
+
+        Product product1 ;
+        Product product2 ;
+
+        product1 = new Product("1", 100.0, "jewellery", "Product 1", "image1");
+        product2 = new Product("2", 200.0, "jewellery", "Product 2", "image2");
+        List<Product> productList = Arrays.asList(product1, product2);
+
+        when(productRepository.findAll()).thenReturn(productList);
+
+        List<Product> result = productService.getAllProducts();
+
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals(product1.getId(), result.get(0).getId());
+        assertEquals(product1.getTitle(), result.get(0).getTitle());
+        assertEquals(product2.getId(), result.get(1).getId());
+        assertEquals(product2.getTitle(), result.get(1).getTitle());
+
+        verify(productRepository, times(1)).findAll();
     }
 }
 
