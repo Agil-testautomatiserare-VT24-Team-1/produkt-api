@@ -4,11 +4,11 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
-import io.cucumber.spring.CucumberContextConfiguration;
-import org.junit.runner.RunWith;
+import io.cucumber.java.en.When;
+import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
@@ -45,6 +45,36 @@ public class StepDefinition {
         if (driver != null) {
             driver.quit();
         }
+    }
+
+    @Then("webshop logo should be displayed")
+    public void webshopLogoShouldBeDisplayed() {
+
+            WebElement logo = driver.findElement(By.xpath("//a[@class='d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none']/h1"));
+            boolean displayedlogo = logo.isDisplayed();
+            Assertions.assertTrue(displayedlogo, "The logo should be visible.");
+        }
+
+
+    @When("user click on {string}")
+    public void userClickOn(String arg0) {
+        driver.findElement(By.xpath("/html/body/header/div/div/ul/li[2]/a")).click();
+        driver.findElement(By.xpath("/html/body/header/div/div/div/a")).click();
+        
+    }
+
+    @Then("{string} should open")
+    public void shouldOpen(String arg0) {
+        driver.findElement(By.cssSelector("body > main > div.py-5.text-center > h2")).isDisplayed();
+
+
+
+    }
+
+    @Then("product page should open")
+    public void productPageShouldOpen() {
+        driver.findElement(By.xpath("/html/body/div[1]")).isDisplayed();
+
     }
 }
 

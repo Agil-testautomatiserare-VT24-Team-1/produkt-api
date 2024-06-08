@@ -44,10 +44,6 @@ class ProductServiceTest {
         closeable.close();
     }
 
-    @Test
-    void getAllProducts() {
-        // Implementation for this test method
-    }
 
     @Test
     void getProductByIdSuccess() {
