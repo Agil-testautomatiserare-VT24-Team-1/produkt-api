@@ -8,7 +8,9 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
@@ -39,6 +41,13 @@ public class StepDefinition {
         assertEquals(expectedTitle, actualTitle);
 
     }
+    @Then("The page contains {string} text")
+    public void thePageContainsText(String expectedText) {
+        WebElement element = driver.findElement(By.className("display-4"));
+        String actualText = element.getText();
+        assertEquals(expectedText, actualText);
+    }
+
     @After
     public void closeDriver() {
 
