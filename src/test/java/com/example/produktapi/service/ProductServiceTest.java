@@ -15,12 +15,14 @@ import org.mockito.MockitoAnnotations;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.List;
+import java.util.Arrays;
 
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class ProductServiceTest {
 
@@ -62,10 +64,11 @@ class ProductServiceTest {
 
         Product productById = productService.getProductById(1);
         assertNotNull(productById);
-        assertEquals(productById.getTitle(),"jewellery");
+        assertEquals(productById.getTitle(), "jewellery");
     }
+
     @Test
-    void getProductByIdNegative(){
+    void getProductByIdNegative() {
         Mockito.when(productRepository.findById(any())).thenReturn(Optional.empty());
 
         // Asserting that getProductById() method throws EntityNotFoundException
@@ -73,6 +76,7 @@ class ProductServiceTest {
             productService.getProductById(1);
         });
     }
+
     @Test
     void addProduct_ProductDoesNotExist_SavesProduct() {
         // Arrange
@@ -89,6 +93,7 @@ class ProductServiceTest {
         assertEquals("2", savedProduct.getTitle());
         assertEquals(200.0, savedProduct.getPrice());
     }
+
     @Test
     void addProduct_ProductAlreadyExists_ThrowsBadRequestException() {
         // Arrange
@@ -106,6 +111,20 @@ class ProductServiceTest {
     }
 
     @Test
+    void getAllCategories_ReturnsCorrectCategories() {
+        // Arrange
+        List<String> expectedCategories = Arrays.asList("jewellery", "electronics", "clothing");
+        when(productRepository.findAllCategories()).thenReturn(expectedCategories);
+
+        // Act
+        List<String> actualCategories = productService.getAllCategories();
+
+        // Assert
+        assertEquals(expectedCategories, actualCategories);
+    }
+
+
+    @Test
     void getProductsByCategory_ReturnsCorrectProducts() {
         // Arrange
         Product product1 = new Product("Product 1", 100.0, "electronics", "Description 1", "image1.jpg");
@@ -119,6 +138,7 @@ class ProductServiceTest {
         // Assert
         assertEquals(expectedProducts, actualProducts);
     }
+
 }
 
 
