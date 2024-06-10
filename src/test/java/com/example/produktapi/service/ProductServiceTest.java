@@ -12,6 +12,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.List;
 import java.util.Arrays;
@@ -119,6 +121,22 @@ class ProductServiceTest {
 
         // Assert
         assertEquals(expectedCategories, actualCategories);
+    }
+
+
+    @Test
+    void getProductsByCategory_ReturnsCorrectProducts() {
+        // Arrange
+        Product product1 = new Product("Product 1", 100.0, "electronics", "Description 1", "image1.jpg");
+        Product product2 = new Product("Product 2", 200.0, "electronics", "Description 2", "image2.jpg");
+        List<Product> expectedProducts = Arrays.asList(product1, product2);
+        when(productRepository.findByCategory("electronics")).thenReturn(expectedProducts);
+
+        // Act
+        List<Product> actualProducts = productService.getProductsByCategory("electronics");
+
+        // Assert
+        assertEquals(expectedProducts, actualProducts);
     }
 
 }
