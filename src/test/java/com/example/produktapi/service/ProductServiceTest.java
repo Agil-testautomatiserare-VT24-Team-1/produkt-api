@@ -127,7 +127,8 @@ class ProductServiceTest {
         assertEquals(product2.getTitle(), result.get(1).getTitle());
 
         verify(productRepository, times(1)).findAll();
-
+    }
+    
     void getProductsByCategory_ReturnsCorrectProducts() {
         // Arrange
         Product product1 = new Product("Product 1", 100.0, "electronics", "Description 1", "image1.jpg");
