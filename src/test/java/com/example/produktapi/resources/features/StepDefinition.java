@@ -5,7 +5,9 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -21,17 +23,17 @@ import java.time.Duration;
 
 public class StepDefinition {
 
-    WebDriver driver;
-   WebDriverWait wait;
+    static WebDriver driver;
+   static WebDriverWait wait;
     @Before
-    public void setup() {
+    public static void setup() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-       wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
     @Given("webshop is available")
@@ -122,8 +124,8 @@ public class StepDefinition {
             }
             }
 
-        @After
-        public void closeDriver() {
+        @AfterAll
+        public static void closeDriver() {
 
             if (driver != null) {
                 driver.quit();
