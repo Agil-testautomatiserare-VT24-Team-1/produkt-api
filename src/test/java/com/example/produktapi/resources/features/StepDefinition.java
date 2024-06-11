@@ -4,12 +4,18 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import io.cucumber.spring.CucumberContextConfiguration;
+import org.junit.runner.RunWith;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -46,6 +52,13 @@ public class StepDefinition {
         String actualTitle = driver.getTitle();
         assertEquals(expectedTitle, actualTitle);
 
+    }
+
+    @Then("The page contains {string} text")
+    public void thePageContainsText(String expectedText) {
+        WebElement element = driver.findElement(By.className("display-4"));
+        String actualText = element.getText();
+        assertEquals(expectedText, actualText);
     }
 
 
