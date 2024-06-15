@@ -11,8 +11,8 @@ Feature: Page Loading
     Then The page contains "This shop is all you need" text
 
   Scenario: The logo is visible
-  Given webshop is available
-  Then webshop logo should be displayed
+    Given webshop is available
+    Then webshop logo should be displayed
 
   Scenario: product page is visible
     Given webshop is available
@@ -33,3 +33,8 @@ Feature: Page Loading
     Given product page is available
     When  for adding product in cart user  click on add to cart "+Add to cart"
     Then check the quantity in the checkout button
+
+  Scenario: checkout link in footer is clickable
+    Given webshop is available
+    When user click on "checkout"
+    Then "Checkout form page" should open
