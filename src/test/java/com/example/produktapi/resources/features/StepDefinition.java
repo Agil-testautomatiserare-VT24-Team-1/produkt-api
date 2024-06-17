@@ -2,6 +2,7 @@ package com.example.produktapi.resources.features;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.en.But;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -30,10 +31,11 @@ public class StepDefinition {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--window-size=1920,1080");
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     }
 
     @Given("webshop is available")
@@ -65,8 +67,7 @@ public class StepDefinition {
         driver.findElement(By.xpath("/html/body/header/div/div/div/a")).click();
         //Thread.sleep(10000);
         //driver.findElement(By.cssSelector("#main > div:nth-child(1) > div > div > button")).click();
-
-    }
+        }
 
     @Then("{string} should open")
     public void shouldOpen(String arg0) {
@@ -98,8 +99,6 @@ public class StepDefinition {
         WebElement xyz =driver.findElement(By.xpath("//*[@id=\"main\"]/div[1]/div/div/button"));
         Actions actions = new Actions(driver);
         actions.moveToElement(xyz).perform();
-
-        // Now click the button
         xyz.click();
 
 
@@ -123,6 +122,30 @@ public class StepDefinition {
                 Assertions.fail("Quantity in the checkout button is not greater than 1. Current quantity: " + quantity);
             }
             }
+
+
+
+        @When("the user clicks on the {string} button")
+        public void theUserClicksOnTheButton(String buttonName) {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds (30));
+            WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='btn btn-primary btn-lg px-4 me-md-2 fw-bold']")));
+            button.click();
+        }
+
+        @Then("user product page should open")
+        public void userProductPageShouldOpen() {
+            driver.get("https://webshop-agil-testautomatiserare.netlify.app/products.html");
+            // Add assertions to verify that the product page has opened, if necessary
+        }
+
+
+    @Then("user  should see the category list")
+    public void userShouldSeeTheCategoryList() {
+    }
+
+
+
+
 
         @AfterAll
         public static void closeDriver() {
