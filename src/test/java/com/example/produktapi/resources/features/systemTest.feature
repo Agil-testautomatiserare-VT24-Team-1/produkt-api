@@ -6,6 +6,10 @@ Feature: Page Loading
   Scenario: webshop should show correct title
     Then the title should be "The Shop"
 
+
+  Scenario: the page is loaded
+    Then The page contains "This shop is all you need" text
+
   Scenario: The logo is visible
   Given webshop is available
   Then webshop logo should be displayed
@@ -37,6 +41,8 @@ Feature: Page Loading
     And  product page is available
     When the user clicks on the "All products" button
     Then user product page should open
+
+
 
 
 
