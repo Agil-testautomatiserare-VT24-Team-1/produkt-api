@@ -30,7 +30,6 @@ class ProductServiceTest {
     @InjectMocks
     private ProductService productService;
 
-    // AutoCloseable resource for MockitoAnnotations.openMocks()
     private AutoCloseable closeable;
 
     @BeforeEach
