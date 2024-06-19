@@ -4,7 +4,7 @@ Feature: Page Loading
     Given webshop is available
 
   Scenario: webshop should show correct title
-    Then the title should be "Webbutiken"
+    Then the title should be "The Shop"
 
 
   Scenario: the page is loaded
@@ -33,3 +33,8 @@ Feature: Page Loading
     Given product page is available
     When  for adding product in cart user  click on add to cart "+Add to cart"
     Then check the quantity in the checkout button
+
+Scenario: test search functionality
+    Given product page is available
+    When user search for "product"
+    Then the search result should be displayed
