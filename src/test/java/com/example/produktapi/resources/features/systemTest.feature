@@ -33,3 +33,10 @@ Feature: Page Loading
     Given product page is available
     When  for adding product in cart user  click on add to cart "+Add to cart"
     Then check the quantity in the checkout button
+
+  Scenario:
+    Given user navigates to Webshop
+    When adding 2x'Mens Cotton Jacket' to the cart
+    And navigating to Checkout
+    Then there are 2x'Mens Cotton Jacket' in the cart costing 55.99 each
+    And the total price is "$111.98"
