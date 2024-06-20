@@ -153,16 +153,16 @@ public class StepDefinition {
         element.click();
     }
     @When("showing all categories")
-    public void showing_all_categories() {
+    public void showing_all_categories() throws InterruptedException {
         WebElement element = driver.findElement(By.xpath("/html/body/div[1]/div/ul/li[1]/a"));
+        Thread.sleep(4000);
         element.click();
     }
     @Then("there are {int} items listed")
     public void there_are_items_listed(Integer intCount) throws InterruptedException {
         Thread.sleep(2000);
-        List<WebElement> elements = driver.findElements(By.xpath("//div[@class='card h-100 p-3']"));
-        //undersök varför får vi dubbelt så många element
-        assertEquals(intCount*2, elements.size());
+        List<WebElement> elements = driver.findElements(By.xpath("//div[@class='col']"));
+        assertEquals(intCount, elements.size());
     }
 
 }
