@@ -31,7 +31,7 @@ Feature: Page Loading
   Scenario: product is added in to the cart
     Given product page is available
     When  for adding product in cart user  click on add to cart "+Add to cart"
-    Then check the quantity in the checkout button
+    Then check the quantity in the checkout button "1"
 
     Scenario: There are 20 items in all category
       Given the user navigates to Shop
