@@ -4,7 +4,7 @@ Feature: Page Loading
     Given webshop is available
 
   Scenario: webshop should show correct title
-    Then the title should be "Webbutiken"
+    Then the title should be "The Shop"
 
 
   Scenario: the page is loaded
