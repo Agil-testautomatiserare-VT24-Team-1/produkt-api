@@ -19,8 +19,12 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.Duration;
+import java.util.List;
+
+import io.cucumber.datatable.DataTable;
 
 public class StepDefinition {
 
@@ -35,7 +39,7 @@ public class StepDefinition {
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     @Given("webshop is available")
@@ -127,7 +131,7 @@ public class StepDefinition {
 
         @When("the user clicks on the {string} button")
         public void theUserClicksOnTheButton(String buttonName) {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds (30));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds (10));
             WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='btn btn-primary btn-lg px-4 me-md-2 fw-bold']")));
             button.click();
         }
@@ -139,14 +143,6 @@ public class StepDefinition {
         }
 
 
-    @Then("user  should see the category list")
-    public void userShouldSeeTheCategoryList() {
-    }
-
-
-
-
-
         @AfterAll
         public static void closeDriver() {
 
@@ -154,10 +150,7 @@ public class StepDefinition {
                 driver.quit();
             }
         }
-
-
-
-}
+   }
 
 
 

@@ -34,9 +34,16 @@ Feature: Page Loading
 
   Scenario: "All products" button is not functioning as expected
     Given webshop is available
-    And  product page is available
     When the user clicks on the "All products" button
     Then user product page should open
+
+
+
+
+
+
+
+
 
 
 
