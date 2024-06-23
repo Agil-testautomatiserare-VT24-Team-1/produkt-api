@@ -128,7 +128,7 @@ public class StepDefinition {
         String quantityText = checkoutButton.getText();
         Thread.sleep(5000);
 
-        Assert.assertEquals(checkoutNumber, quantityText);
+        Assert.assertEquals(1, quantityText);
     }
 
     @When("click the checkout button")
