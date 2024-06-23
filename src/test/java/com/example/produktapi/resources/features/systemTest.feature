@@ -35,22 +35,10 @@ Feature: Page Loading
     Then check the quantity in the checkout button
 
 
-
-  Scenario: "All products" button is not functioning as expected
-    Given webshop is available
-    When the user clicks on the "All products" button
-    Then user product page should open
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  Scenario: multiple product is added in to the cart
+    Given product page is available
+    When  for adding product in cart user  click on add to cart "+Add to cart"
+    When  for adding product in cart user  click on add to cart "+Add to cart"
+    Then check the quantity in the checkout button "2"
+    When click the checkout button
+    Then total sum is "$219.90"
