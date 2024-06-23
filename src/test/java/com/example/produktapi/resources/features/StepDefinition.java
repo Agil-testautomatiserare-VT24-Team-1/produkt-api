@@ -123,7 +123,7 @@ public class StepDefinition {
     }
 
     @Then("check the quantity in the checkout button")
-    public void checkTheQuantityInTheCheckoutButton(String checkoutNumber) throws InterruptedException {
+    public void checkTheQuantityInTheCheckoutButton() throws InterruptedException {
         WebElement checkoutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"buttonSize\"]")));
         String quantityText = checkoutButton.getText();
         Thread.sleep(5000);
