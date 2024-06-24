@@ -1,6 +1,5 @@
 package com.example.produktapi.model;
 
-
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -10,13 +9,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductTest {
-
     Product product;
 
     @BeforeEach
     void setUp() {
         product = new Product();
-
     }
 
     @AfterEach
@@ -54,14 +51,12 @@ public class ProductTest {
         Assert.assertEquals(product.getTitle(), "Title");
     }
 
-    //David Galstyan
     @Test
     void getTitleNull(){
         String productTitle = null;
         product.setTitle(productTitle);
         assertNull(product.getTitle());
     }
-    //David Galstyan
     @Test
     void setTitle() {
         String productTitle = "Product title";
@@ -71,7 +66,6 @@ public class ProductTest {
 
     @Test
     void getCategoryReturnsCorrectCategory() {
-
         String expectedCategory = "jewellery";
         Product product = new Product();
         product.setCategory(expectedCategory);
@@ -81,7 +75,6 @@ public class ProductTest {
 
     @Test
     void getCategoryReturnsNullWhenCategoryNotSet() {
-
         Product product = new Product();
         String actualCategory = product.getCategory();
         assertNull(actualCategory, "The category should be null when it is not set");

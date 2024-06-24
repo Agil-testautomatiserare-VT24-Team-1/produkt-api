@@ -9,24 +9,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.List;
-import java.util.Arrays;
-
 
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
-
 
 class ProductServiceTest {
 
@@ -36,20 +30,17 @@ class ProductServiceTest {
     @InjectMocks
     private ProductService productService;
 
-    // AutoCloseable resource for MockitoAnnotations.openMocks()
     private AutoCloseable closeable;
 
     @BeforeEach
     void setUp() {
         closeable = MockitoAnnotations.openMocks(this);
-
     }
 
     @AfterEach
     void tearDown() throws Exception {
         closeable.close();
     }
-
 
     @Test
     void getProductByIdSuccess() {
@@ -69,8 +60,7 @@ class ProductServiceTest {
     }
 
     @Test
-
-    void getProductByIdNegative(){
+    void getProductByIdNegative() {
         when(productRepository.findById(any())).thenReturn(Optional.empty());
         // Asserting that getProductById() method throws EntityNotFoundException
         assertThrows(EntityNotFoundException.class, () -> {
@@ -112,12 +102,9 @@ class ProductServiceTest {
     }
 
     @Test
-
-
     void testGetAllProducts() {
-
-        Product product1 ;
-        Product product2 ;
+        Product product1;
+        Product product2;
 
         product1 = new Product("1", 100.0, "jewellery", "Product 1", "image1");
         product2 = new Product("2", 200.0, "jewellery", "Product 2", "image2");
@@ -136,7 +123,6 @@ class ProductServiceTest {
 
         verify(productRepository, times(1)).findAll();
     }
-    
 
     void getAllCategories_ReturnsCorrectCategories() {
         // Arrange
@@ -150,9 +136,7 @@ class ProductServiceTest {
         assertEquals(expectedCategories, actualCategories);
     }
 
-
     @Test
-
     void getProductsByCategory_ReturnsCorrectProducts() {
         // Arrange
         Product product1 = new Product("Product 1", 100.0, "electronics", "Description 1", "image1.jpg");
@@ -165,9 +149,7 @@ class ProductServiceTest {
 
         // Assert
         assertEquals(expectedProducts, actualProducts);
-
     }
-
 }
 
 
