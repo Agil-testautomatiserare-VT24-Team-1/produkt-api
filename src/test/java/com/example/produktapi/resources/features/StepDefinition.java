@@ -37,7 +37,7 @@ public class StepDefinition {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--headless");
+        //options.addArguments("--headless");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -129,7 +129,8 @@ public class StepDefinition {
     }
 
     @When("click the checkout button")
-    public void clickTheCheckoutButton(){
+    public void clickTheCheckoutButton() throws InterruptedException {
+        Thread.sleep(200);
         driver.findElement(By.cssSelector(".btn-warning")).click();
     }
 
