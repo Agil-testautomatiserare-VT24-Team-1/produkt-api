@@ -7,6 +7,7 @@ import io.cucumber.java.en.Then;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
+//import io.cucumber.messages.types.DataTable;
 import io.cucumber.spring.CucumberContextConfiguration;
 import org.junit.runner.RunWith;
 import io.cucumber.java.en.When;
@@ -23,9 +24,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import io.cucumber.datatable.DataTable;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.Duration;
+import java.util.List;
+
+
 
 public class StepDefinition {
 
@@ -136,6 +141,23 @@ public class StepDefinition {
                 Assertions.fail("Quantity in the checkout button is not greater than 1. Current quantity: " + quantity);
             }
             }
+
+    @Given("the user is on the shop page")
+    public void theUserIsOnTheShopPage() {
+        driver.get("https://webshop-agil-testautomatiserare.netlify.app/products.html#");
+
+    }
+
+    @Then("the user should see the following categories:")
+    public void theUserShouldSeeTheFollowingCategories(DataTable dataTable) {
+        List<String> expectedCategories = dataTable.asList(String.class);
+              for (String category : expectedCategories) {
+                  String xpath = String.format("//a[normalize-space()='%s']", category);
+                     List<WebElement> categoryElements = driver.findElements(By.xpath(xpath));
+                       assertTrue("Category not found: " + category, !categoryElements.isEmpty());
+        }
+
+    }
 
         @AfterAll
         public static void closeDriver() {
