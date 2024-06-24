@@ -38,3 +38,13 @@ Scenario: test search functionality
     Given product page is available
     When user search for "product"
     Then the search result should be displayed
+    Then check the quantity in the checkout button "1"
+
+  Scenario: multiple product is added in to the cart
+    Given product page is available
+    When  for adding product in cart user  click on add to cart "+Add to cart"
+    When  for adding product in cart user  click on add to cart "+Add to cart"
+    Then check the quantity in the checkout button "2"
+    When click the checkout button
+    Then total sum is "$219.90"
+

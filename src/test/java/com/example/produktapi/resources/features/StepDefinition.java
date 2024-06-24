@@ -118,13 +118,12 @@ public class StepDefinition {
 
     }
 
-    @Then("check the quantity in the checkout button")
-    public void checkTheQuantityInTheCheckoutButton() throws InterruptedException {
-
+    @Then("check the quantity in the checkout button {string}")
+    public void checkTheQuantityInTheCheckoutButton(String checkoutNumber) throws InterruptedException {
         WebElement checkoutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"buttonSize\"]")));
-
         String quantityText = checkoutButton.getText();
-        Thread.sleep(10000);
+
+      Thread.sleep(10000);
         int quantity = Integer.parseInt(quantityText);
         //  Thread.sleep(10000);
         if (quantity >= 1) {
@@ -133,6 +132,29 @@ public class StepDefinition {
         } else {
             // Fail the test if the quantity is not greater than 1
             Assertions.fail("Quantity in the checkout button is not greater than 1. Current quantity: " + quantity);
+
+        Assert.assertEquals(checkoutNumber, quantityText);
+    }
+
+    @When("click the checkout button")
+    public void clickTheCheckoutButton(){
+        driver.findElement(By.cssSelector(".btn-warning")).click();
+    }
+
+    @Then ("total sum is {string}")
+    public void totalSumIs (String expectedTotalSum){
+        WebElement listItem = driver.findElement(By.xpath("//li[span[text()='Total (USD)']]"));
+        WebElement totalElement = listItem.findElement(By.tagName("strong"));
+        String totalSumText = totalElement.getText();
+        Assert.assertEquals(totalSumText, expectedTotalSum);
+    }
+        @AfterAll
+        public static void closeDriver() {
+
+            if (driver != null) {
+                driver.quit();
+            }
+
         }
     }
 
