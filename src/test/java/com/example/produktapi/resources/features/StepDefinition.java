@@ -1,21 +1,15 @@
 package com.example.produktapi.resources.features;
 
-import io.cucumber.java.After;
+
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
-import io.cucumber.spring.CucumberContextConfiguration;
 import org.junit.Assert;
-import org.junit.runner.RunWith;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
