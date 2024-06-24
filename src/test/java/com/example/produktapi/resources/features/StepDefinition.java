@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import io.cucumber.spring.CucumberContextConfiguration;
+import org.junit.Assert;
 import org.junit.runner.RunWith;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.AfterAll;
@@ -118,25 +119,27 @@ public class StepDefinition {
 
     }
 
-    @Then("check the quantity in the checkout button")
-    public void checkTheQuantityInTheCheckoutButton() throws InterruptedException {
+    @Then("check the quantity in the checkout button {string}")
+    public void checkTheQuantityInTheCheckoutButton(String checkoutNumber) throws InterruptedException {
+        WebElement checkoutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"buttonSize\"]")));
+        String quantityText = checkoutButton.getText();
+        Thread.sleep(5000);
 
-            WebElement checkoutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"buttonSize\"]")));
-            
-            String quantityText = checkoutButton.getText();
-             Thread.sleep(10000);
-            int quantity = Integer.parseInt(quantityText);
-           //  Thread.sleep(10000);
-            if (quantity >= 1) {
+        Assert.assertEquals(checkoutNumber, quantityText);
+    }
 
-                System.out.println("Proceeding to checkout with quantity: " + quantity);
-            }
-            else {
-                // Fail the test if the quantity is not greater than 1
-                Assertions.fail("Quantity in the checkout button is not greater than 1. Current quantity: " + quantity);
-            }
-            }
+    @When("click the checkout button")
+    public void clickTheCheckoutButton(){
+        driver.findElement(By.cssSelector(".btn-warning")).click();
+    }
 
+    @Then ("total sum is {string}")
+    public void totalSumIs (String expectedTotalSum){
+        WebElement listItem = driver.findElement(By.xpath("//li[span[text()='Total (USD)']]"));
+        WebElement totalElement = listItem.findElement(By.tagName("strong"));
+        String totalSumText = totalElement.getText();
+        Assert.assertEquals(totalSumText, expectedTotalSum);
+    }
         @AfterAll
         public static void closeDriver() {
 
