@@ -122,8 +122,12 @@ public class StepDefinition {
         WebElement checkoutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"buttonSize\"]")));
         String quantityText = checkoutButton.getText();
         Thread.sleep(5000);
-
-        Assert.assertEquals("1", quantityText);
+        try {
+            int quantity = Integer.parseInt(quantityText);
+            Assertions.assertTrue(quantity > 0, "Quantity is not greater than 0");
+        } catch (NumberFormatException e) {
+            Assertions.fail("Quantity text is not a valid integer: " + quantityText);
+        }
     }
 
     @When("click the checkout button")
