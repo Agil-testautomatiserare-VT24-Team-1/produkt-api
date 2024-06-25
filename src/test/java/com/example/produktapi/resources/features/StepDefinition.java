@@ -1,22 +1,15 @@
 package com.example.produktapi.resources.features;
 
-import io.cucumber.java.After;
+
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
-//import io.cucumber.messages.types.DataTable;
-import io.cucumber.spring.CucumberContextConfiguration;
 import org.junit.Assert;
-import org.junit.runner.RunWith;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -124,13 +117,13 @@ public class StepDefinition {
 
     }
 
-    @Then("check the quantity in the checkout button {string}")
-    public void checkTheQuantityInTheCheckoutButton(String checkoutNumber) throws InterruptedException {
+    @Then("check the quantity in the checkout button")
+    public void checkTheQuantityInTheCheckoutButton() throws InterruptedException {
         WebElement checkoutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"buttonSize\"]")));
         String quantityText = checkoutButton.getText();
         Thread.sleep(5000);
 
-        Assert.assertEquals(checkoutNumber, quantityText);
+        Assert.assertEquals(1, quantityText);
     }
 
     @When("click the checkout button")
