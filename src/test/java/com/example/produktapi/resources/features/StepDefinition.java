@@ -126,7 +126,7 @@ public class StepDefinition {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@type='button' and contains(text(), 'Checkout')]")));
         driver.findElement(By.xpath("//a[@type='button' and contains(text(), 'Checkout')]")).click();
     }
-
+  
     @Then ("total sum is {string}")
     public void totalSumIs (String expectedTotalSum){
         WebElement listItem = driver.findElement(By.xpath("//li[span[text()='Total (USD)']]"));
@@ -135,7 +135,48 @@ public class StepDefinition {
         Assert.assertEquals(totalSumText, expectedTotalSum);
     }
 
-    @Given("the user navigates to Shop")
+    @Given("user navigates to Webshop")
+    public void user_navigates_to_webshop() throws InterruptedException {
+        Thread.sleep(2000);
+        //hitta och klicka "Webshop" knappen
+        WebElement element = driver.findElement(By.xpath("/html/body/header/div/div/ul/li[2]/a"));
+        element.click();
+    }
+    @When("adding 2x'Mens Cotton Jacket' to the cart")
+    public void adding_2x_mens_cotton_jacket_to_the_cart() throws InterruptedException {
+        Thread.sleep(2000);
+
+        WebElement element = driver.findElement(By.xpath("/html/body/main/div[3]/div/div/button"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
+        //lägg till två "Mens Cotton Jacket" i varukorgen genom att klicka på "Add to cart" knappen två gånger
+        element.click();
+        element.click();
+    }
+    @When("navigating to Checkout")
+    public void navigating_to_checkout() throws InterruptedException {
+        WebElement element = driver.findElement(By.xpath("/html/body/header/div/div/div/a"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
+        element.click();
+    }
+    @Then("there are 2x'Mens Cotton Jacket' in the cart costing {double} each")
+    public void there_are_2x_mens_cotton_jacket_in_the_cart_costing_each(Double double1) throws InterruptedException {
+        Thread.sleep(2000);
+        //Kontrollera namn på första artikeln
+        WebElement element = driver.findElement(By.xpath("//*[@id=\"cartList\"]/li[1]/div/h6"));
+        Assertions.assertEquals("Mens Cotton Jacket", element.getText());
+        //Kontrollera namn på andra artikeln
+        element = driver.findElement(By.xpath("//*[@id=\"cartList\"]/li[2]/div/h6"));
+        Assertions.assertEquals("Mens Cotton Jacket", element.getText());
+    }
+    @Then("the total price is {string}")
+    public void the_total_price_is(String stringPrice) {
+        WebElement element = driver.findElement(By.xpath("//*[@id=\"cartList\"]/li[3]/strong"));
+        Assertions.assertEquals(stringPrice, element.getText());
+    }
+
+      @Given("the user navigates to Shop")
     public void the_user_navigates_to_shop() {
         //find "Shop" and click
         WebElement element = driver.findElement(By.xpath("/html/body/header/div/div/ul/li[2]/a"));
@@ -154,7 +195,7 @@ public class StepDefinition {
         assertEquals(intCount, elements.size());
     }
 
-    @AfterAll
+        @AfterAll
         public static void closeDriver() {
 
             if (driver != null) {
