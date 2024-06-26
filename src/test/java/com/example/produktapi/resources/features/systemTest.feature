@@ -49,7 +49,7 @@ Feature: Page Loading
     When click the checkout button
     Then total sum is "$219.90"
 
-=======
+
     #I cant get this When to work "headless". Not headless i works fine
     #When click the checkout button
     #Then total sum is "$219.90"
