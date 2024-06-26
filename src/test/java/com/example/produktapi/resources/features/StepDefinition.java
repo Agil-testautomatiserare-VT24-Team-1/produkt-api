@@ -113,8 +113,6 @@ public class StepDefinition {
 
         // Now click the button
         xyz.click();
-
-
     }
 
     @Then("check the quantity in the checkout button")
@@ -131,8 +129,9 @@ public class StepDefinition {
     }
 
     @When("click the checkout button")
-    public void clickTheCheckoutButton(){
-        driver.findElement(By.cssSelector(".btn-warning")).click();
+    public void clickTheCheckoutButton() throws InterruptedException {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@type='button' and contains(text(), 'Checkout')]")));
+        driver.findElement(By.xpath("//a[@type='button' and contains(text(), 'Checkout')]")).click();
     }
 
 
@@ -168,19 +167,4 @@ public class StepDefinition {
                 driver.quit();
             }
         }
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
