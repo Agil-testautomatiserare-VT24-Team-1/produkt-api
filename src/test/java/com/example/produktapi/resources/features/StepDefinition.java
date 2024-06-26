@@ -21,6 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.Duration;
+import java.util.List;
 
 public class StepDefinition {
 
@@ -133,7 +134,27 @@ public class StepDefinition {
         String totalSumText = totalElement.getText();
         Assert.assertEquals(totalSumText, expectedTotalSum);
     }
-        @AfterAll
+
+    @Given("the user navigates to Shop")
+    public void the_user_navigates_to_shop() {
+        //find "Shop" and click
+        WebElement element = driver.findElement(By.xpath("/html/body/header/div/div/ul/li[2]/a"));
+        element.click();
+    }
+    @When("showing all categories")
+    public void showing_all_categories() throws InterruptedException {
+        WebElement element = driver.findElement(By.xpath("/html/body/div[1]/div/ul/li[1]/a"));
+        Thread.sleep(4000);
+        element.click();
+    }
+    @Then("there are {int} items listed")
+    public void there_are_items_listed(Integer intCount) throws InterruptedException {
+        Thread.sleep(2000);
+        List<WebElement> elements = driver.findElements(By.xpath("//div[@class='col']"));
+        assertEquals(intCount, elements.size());
+    }
+
+    @AfterAll
         public static void closeDriver() {
 
             if (driver != null) {
