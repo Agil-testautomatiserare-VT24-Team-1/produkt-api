@@ -46,4 +46,3 @@ Feature: Page Loading
     Given the user navigates to Shop
     When showing all categories
     Then there are 20 items listed
-
