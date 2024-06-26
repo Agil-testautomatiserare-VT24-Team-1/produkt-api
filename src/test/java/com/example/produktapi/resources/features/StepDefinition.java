@@ -109,8 +109,6 @@ public class StepDefinition {
 
         // Now click the button
         xyz.click();
-
-
     }
 
     @Then("check the quantity in the checkout button {string}")
