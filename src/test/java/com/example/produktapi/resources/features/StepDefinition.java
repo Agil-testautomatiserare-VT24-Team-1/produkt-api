@@ -4,9 +4,15 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+import org.junit.Assert;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.*;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
@@ -77,27 +83,22 @@ public class StepDefinition {
         driver.findElement(By.xpath("/html/body/header/div/div/div/a")).click();
         //Thread.sleep(10000);
         //driver.findElement(By.cssSelector("#main > div:nth-child(1) > div > div > button")).click();
-
     }
 
     @Then("{string} should open")
     public void shouldOpen(String arg0) {
         driver.findElement(By.cssSelector("body > main > div.py-5.text-center > h2")).isDisplayed();
-
     }
 
     @Then("product page should open")
     public void productPageShouldOpen() {
         driver.findElement(By.xpath("/html/body/div[1]")).isDisplayed();
-
     }
 
     @Then("The {string} should visible")
     public void theShouldVisible(String arg0) throws InterruptedException {
         Thread.sleep(10000);
         driver.findElement(By.xpath("//img[@src=\"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg\"]")).isDisplayed();
-
-
     }
 
     @Given("product page is available")
@@ -114,8 +115,6 @@ public class StepDefinition {
 
         // Now click the button
         xyz.click();
-
-
     }
 
     @Then("check the quantity in the checkout button {string}")
@@ -137,8 +136,9 @@ public class StepDefinition {
     }
 
     @When("click the checkout button")
-    public void clickTheCheckoutButton(){
-        driver.findElement(By.cssSelector(".btn-warning")).click();
+    public void clickTheCheckoutButton() throws InterruptedException {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@type='button' and contains(text(), 'Checkout')]")));
+        driver.findElement(By.xpath("//a[@type='button' and contains(text(), 'Checkout')]")).click();
     }
 
     @Then ("total sum is {string}")
@@ -195,15 +195,3 @@ public class StepDefinition {
         }*/
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
