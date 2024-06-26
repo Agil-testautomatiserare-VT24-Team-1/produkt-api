@@ -50,3 +50,9 @@ Feature: Page Loading
     #When click the checkout button
     #Then total sum is "$219.90"
 
+
+  Scenario: There are 20 items in all category
+    Given the user navigates to Shop
+    When showing all categories
+    Then there are 20 items listed
+
