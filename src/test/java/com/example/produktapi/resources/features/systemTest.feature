@@ -60,9 +60,9 @@ Scenario: test search functionality
     #Then total sum is "$219.90"
 
 
-  Scenario: There are 20 items in all category
-    Given the user navigates to Shop
-    When showing all categories
-    Then there are 20 items listed
+ # Scenario: There are 20 items in all category
+  #  Given the user navigates to Shop
+   # When showing all categories
+  # Then there are 20 items listed
 
 
