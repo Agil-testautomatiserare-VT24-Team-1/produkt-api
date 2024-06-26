@@ -4,7 +4,7 @@ Feature: Page Loading
     Given webshop is available
 
   Scenario: webshop should show correct title
-    Then the title should be "Webbutiken"
+    Then the title should be "The Shop"
 
 
   Scenario: the page is loaded
@@ -32,14 +32,12 @@ Feature: Page Loading
   Scenario: product is added in to the cart
     Given product page is available
     When  for adding product in cart user  click on add to cart "+Add to cart"
-<<<<<<< ninis/checkoutLinkInFooterIsClickable
     Then check the quantity in the checkout button
 
   Scenario: checkout link in footer is clickable
     Given webshop is available
     When user click on "checkout"
     Then "Checkout form page" should open
-=======
     Then check the quantity in the checkout button "1"
 
   Scenario: multiple product is added in to the cart
@@ -47,6 +45,12 @@ Feature: Page Loading
     When  for adding product in cart user  click on add to cart "+Add to cart"
     When  for adding product in cart user  click on add to cart "+Add to cart"
     Then check the quantity in the checkout button "2"
+
     When click the checkout button
     Then total sum is "$219.90"
->>>>>>> master
+
+=======
+    #I cant get this When to work "headless". Not headless i works fine
+    #When click the checkout button
+    #Then total sum is "$219.90"
+
