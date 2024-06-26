@@ -124,8 +124,8 @@ public class StepDefinition {
 
     @When("click the checkout button")
     public void clickTheCheckoutButton() throws InterruptedException {
-        Thread.sleep(200);
-        driver.findElement(By.cssSelector(".btn-warning")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@type='button' and contains(text(), 'Checkout')]")));
+        driver.findElement(By.xpath("//a[@type='button' and contains(text(), 'Checkout')]")).click();
     }
 
     @Then ("total sum is {string}")
