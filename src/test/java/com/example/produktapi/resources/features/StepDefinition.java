@@ -146,6 +146,14 @@ public class StepDefinition {
         driver.findElement(By.xpath("//a[@type='button' and contains(text(), 'Checkout')]")).click();
     }
 
+    @Then("check the quantity in the checkout button {string}")
+    public void checkTheQuantityInTheCheckoutButton(String checkoutNumber) throws InterruptedException {
+        WebElement checkoutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"buttonSize\"]")));
+        String quantityText = checkoutButton.getText();
+        Thread.sleep(5000);
+
+        Assert.assertEquals(checkoutNumber, quantityText);
+    }
    @Given("the user is on the shop page")
     public void theUserIsOnTheShopPage() {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/products.html#");
