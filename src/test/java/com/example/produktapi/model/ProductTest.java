@@ -11,15 +11,18 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProductTest {
     Product product;
 
+    //Göran Ahlgren
     @BeforeEach
     void setUp() {
         product = new Product();
     }
 
+    //Göran Ahlgren
     @AfterEach
     void tearDown() {
     }
 
+    //Göran Ahlgren
     @Test
     void setIdTest() {
         Product theProduct = new Product();
@@ -119,6 +122,7 @@ public class ProductTest {
         Assertions.assertEquals(expectedImage, actualImage);
     }
 
+    //Göran Ahlgren
     @Test
     void setPrice() {
         Double firstPrice = 12.34;
@@ -129,6 +133,7 @@ public class ProductTest {
         assertEquals(product.getPrice(), newPrice);
     }
 
+    //Göran Ahlgren
     @Test
     void getPrice() {
         assertNull(product.getPrice(), "The price should be null when it is not set");
