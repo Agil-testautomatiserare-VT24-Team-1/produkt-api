@@ -41,6 +41,7 @@ public class StepDefinition {
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--headless");
+        options.addArguments("--window-size=1920,1080");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -140,6 +141,7 @@ public class StepDefinition {
         }
     }
 
+    //Göran Ahlgren
     @When("click the checkout button")
     public void clickTheCheckoutButton() throws InterruptedException {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@type='button' and contains(text(), 'Checkout')]")));
