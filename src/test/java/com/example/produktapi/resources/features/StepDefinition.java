@@ -27,6 +27,7 @@ public class StepDefinition {
 
     static WebDriver driver;
    static WebDriverWait wait;
+
     @Before
     public static void setup() {
         ChromeOptions options = new ChromeOptions();
@@ -50,13 +51,13 @@ public class StepDefinition {
 
     }
 
+    //David Galstyan
     @Then("The page contains {string} text")
     public void thePageContainsText(String expectedText) {
         WebElement element = driver.findElement(By.className("display-4"));
         String actualText = element.getText();
         assertEquals(expectedText, actualText);
     }
-
 
     @Then("webshop logo should be displayed")
     public void webshopLogoShouldBeDisplayed() {
@@ -65,7 +66,6 @@ public class StepDefinition {
             boolean displayedlogo = logo.isDisplayed();
             Assertions.assertTrue(displayedlogo, "The logo should be visible.");
         }
-
 
     @When("user click on {string}")
     public void userClickOn(String arg0) throws InterruptedException {
@@ -126,7 +126,7 @@ public class StepDefinition {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@type='button' and contains(text(), 'Checkout')]")));
         driver.findElement(By.xpath("//a[@type='button' and contains(text(), 'Checkout')]")).click();
     }
-  
+
     @Then ("total sum is {string}")
     public void totalSumIs (String expectedTotalSum){
         WebElement listItem = driver.findElement(By.xpath("//li[span[text()='Total (USD)']]"));
@@ -135,6 +135,7 @@ public class StepDefinition {
         Assert.assertEquals(totalSumText, expectedTotalSum);
     }
 
+    //David Galstyan
     @Given("user navigates to Webshop")
     public void user_navigates_to_webshop() throws InterruptedException {
         Thread.sleep(2000);
@@ -142,6 +143,8 @@ public class StepDefinition {
         WebElement element = driver.findElement(By.xpath("/html/body/header/div/div/ul/li[2]/a"));
         element.click();
     }
+
+    //David Galstyan
     @When("adding 2x'Mens Cotton Jacket' to the cart")
     public void adding_2x_mens_cotton_jacket_to_the_cart() throws InterruptedException {
         Thread.sleep(2000);
@@ -153,6 +156,8 @@ public class StepDefinition {
         element.click();
         element.click();
     }
+
+    //David Galstyan
     @When("navigating to Checkout")
     public void navigating_to_checkout() throws InterruptedException {
         WebElement element = driver.findElement(By.xpath("/html/body/header/div/div/div/a"));
@@ -160,6 +165,8 @@ public class StepDefinition {
         actions.moveToElement(element).perform();
         element.click();
     }
+
+    //David Galstyan
     @Then("there are 2x'Mens Cotton Jacket' in the cart costing {double} each")
     public void there_are_2x_mens_cotton_jacket_in_the_cart_costing_each(Double double1) throws InterruptedException {
         Thread.sleep(2000);
@@ -170,24 +177,31 @@ public class StepDefinition {
         element = driver.findElement(By.xpath("//*[@id=\"cartList\"]/li[2]/div/h6"));
         Assertions.assertEquals("Mens Cotton Jacket", element.getText());
     }
+
+    //David Galstyan
     @Then("the total price is {string}")
     public void the_total_price_is(String stringPrice) {
         WebElement element = driver.findElement(By.xpath("//*[@id=\"cartList\"]/li[3]/strong"));
         Assertions.assertEquals(stringPrice, element.getText());
     }
 
-      @Given("the user navigates to Shop")
+    //David Galstyan
+    @Given("the user navigates to Shop")
     public void the_user_navigates_to_shop() {
         //find "Shop" and click
         WebElement element = driver.findElement(By.xpath("/html/body/header/div/div/ul/li[2]/a"));
         element.click();
     }
+
+    //David Galstyan
     @When("showing all categories")
     public void showing_all_categories() throws InterruptedException {
         WebElement element = driver.findElement(By.xpath("/html/body/div[1]/div/ul/li[1]/a"));
         Thread.sleep(4000);
         element.click();
     }
+
+    //David Galstyan
     @Then("there are {int} items listed")
     public void there_are_items_listed(Integer intCount) throws InterruptedException {
         Thread.sleep(2000);
@@ -195,11 +209,10 @@ public class StepDefinition {
         assertEquals(intCount, elements.size());
     }
 
-        @AfterAll
-        public static void closeDriver() {
-
-            if (driver != null) {
-                driver.quit();
-            }
+    @AfterAll
+    public static void closeDriver() {
+        if (driver != null) {
+            driver.quit();
         }
+    }
 }

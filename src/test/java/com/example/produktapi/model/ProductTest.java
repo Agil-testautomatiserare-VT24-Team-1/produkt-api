@@ -51,12 +51,15 @@ public class ProductTest {
         Assert.assertEquals(product.getTitle(), "Title");
     }
 
+    //David Galstyan
     @Test
     void getTitleNull(){
         String productTitle = null;
         product.setTitle(productTitle);
         assertNull(product.getTitle());
     }
+
+    //David Galstyan
     @Test
     void setTitle() {
         String productTitle = "Product title";
@@ -142,7 +145,7 @@ public class ProductTest {
         String actualDescription = product.getDescription();
         assertEquals(expectedDescription, actualDescription);
     }
-
+    
     @Test
     void setDescription_SetsCorrectDescription() {
         String expectedDescription = "This is a product description";
