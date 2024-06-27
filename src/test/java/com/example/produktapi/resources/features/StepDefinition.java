@@ -54,26 +54,26 @@ public class StepDefinition {
         }
     }
 
-    @Given("webshop is available")
+    @Given("webshop is available")  //apurva
     public void webshop_is_available() {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/");
     }
 
-    @Then("the title should be {string}")
+    @Then("the title should be {string}")  // apurva
     public void the_title_should_be(String expectedTitle) {
         String actualTitle = driver.getTitle();
         assertEquals(expectedTitle, actualTitle);
 
     }
 
-    @Then("The page contains {string} text")
+    @Then("The page contains {string} text") //apurva
     public void thePageContainsText(String expectedText) {
         WebElement element = driver.findElement(By.className("display-4"));
         String actualText = element.getText();
         assertEquals(expectedText, actualText);
     }
 
-    @Then("webshop logo should be displayed")
+    @Then("webshop logo should be displayed")  //apurva
     public void webshopLogoShouldBeDisplayed() {
 
         WebElement logo = driver.findElement(By.xpath("//a[@class='d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none']/h1"));
@@ -81,7 +81,7 @@ public class StepDefinition {
         Assertions.assertTrue(displayedlogo, "The logo should be visible.");
     }
 
-    @When("user click on {string}")
+    @When("user click on {string}")  //apurva
     public void userClickOn(String arg0) throws InterruptedException {
         driver.findElement(By.xpath("/html/body/header/div/div/ul/li[2]/a")).click();
         Thread.sleep(10000);
@@ -91,19 +91,19 @@ public class StepDefinition {
 
     }
 
-    @Then("{string} should open")
+    @Then("{string} should open") //apurva
     public void shouldOpen(String arg0) {
         driver.findElement(By.cssSelector("body > main > div.py-5.text-center > h2")).isDisplayed();
 
     }
 
-    @Then("product page should open")
+    @Then("product page should open")  //apurva
     public void productPageShouldOpen() {
         driver.findElement(By.xpath("/html/body/div[1]")).isDisplayed();
 
     }
 
-    @Then("The {string} should visible")
+    @Then("The {string} should visible")  //apurva
     public void theShouldVisible(String arg0) throws InterruptedException {
         Thread.sleep(10000);
         driver.findElement(By.xpath("//img[@src=\"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg\"]")).isDisplayed();
@@ -111,12 +111,12 @@ public class StepDefinition {
 
     }
 
-    @Given("product page is available")
+    @Given("product page is available")  //apurva
     public void productPageIsAvailable() {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/products");
     }
 
-    @When("for adding product in cart user  click on add to cart {string}")
+    @When("for adding product in cart user  click on add to cart {string}") //apurva
     public void forAddingProductInCartUserClickOnAddToCart(String arg0) throws InterruptedException {
         Thread.sleep(10000);
         WebElement xyz = driver.findElement(By.xpath("//*[@id=\"main\"]/div[1]/div/div/button"));
@@ -127,7 +127,7 @@ public class StepDefinition {
         xyz.click();
     }
 
-    @Then("check the quantity in the checkout button")
+    @Then("check the quantity in the checkout button") //apurva
     public void checkTheQuantityInTheCheckoutButton() throws InterruptedException {
         WebElement checkoutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"buttonSize\"]")));
         String quantityText = checkoutButton.getText();
@@ -140,7 +140,7 @@ public class StepDefinition {
         }
     }
 
-    @When("click the checkout button")
+    @When("click the checkout button") //apurva
     public void clickTheCheckoutButton() throws InterruptedException {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@type='button' and contains(text(), 'Checkout')]")));
         driver.findElement(By.xpath("//a[@type='button' and contains(text(), 'Checkout')]")).click();
@@ -154,13 +154,13 @@ public class StepDefinition {
 
         Assert.assertEquals(checkoutNumber, quantityText);
     }
-   @Given("the user is on the shop page")
+   @Given("the user is on the shop page") //apurva
     public void theUserIsOnTheShopPage() {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/products.html#");
 
     }
 
-    @Then("the user should see the following categories:")
+    @Then("the user should see the following categories:") //apurva
     public void theUserShouldSeeTheFollowingCategories(DataTable dataTable) {
         List<String> expectedCategories = dataTable.asList(String.class);
               for (String category : expectedCategories) {
@@ -171,7 +171,7 @@ public class StepDefinition {
 
     }
 
-    @Then("total sum is {string}")
+    @Then("total sum is {string}") 
     public void totalSumIs(String expectedTotalSum) {
 
         WebElement listItem = driver.findElement(By.xpath("//li[span[text()='Total (USD)']]"));
