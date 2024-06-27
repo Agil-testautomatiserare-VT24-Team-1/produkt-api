@@ -56,3 +56,8 @@ Feature: Page Loading
     When showing all categories
     Then there are 20 items listed
 
+    Scenario: test search functionality
+    Given product page is available
+    When user search for "product"
+    Then the search result should be displayed
+
