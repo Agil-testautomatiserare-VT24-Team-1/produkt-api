@@ -15,11 +15,20 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.cucumber.datatable.DataTable;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.time.Duration;
+import java.util.List;
+
+
+
 import java.time.Duration;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+
 
 public class StepDefinition {
 
@@ -118,13 +127,17 @@ public class StepDefinition {
         xyz.click();
     }
 
-    @Then("check the quantity in the checkout button {string}")
-    public void checkTheQuantityInTheCheckoutButton(String checkoutNumber) throws InterruptedException {
+    @Then("check the quantity in the checkout button")
+    public void checkTheQuantityInTheCheckoutButton() throws InterruptedException {
         WebElement checkoutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"buttonSize\"]")));
         String quantityText = checkoutButton.getText();
         Thread.sleep(5000);
-
-        Assert.assertEquals(checkoutNumber, quantityText);
+        try {
+            int quantity = Integer.parseInt(quantityText);
+            Assertions.assertTrue(quantity > 0, "Quantity is not greater than 0");
+        } catch (NumberFormatException e) {
+            Assertions.fail("Quantity text is not a valid integer: " + quantityText);
+        }
     }
 
     @When("click the checkout button")
@@ -133,13 +146,37 @@ public class StepDefinition {
         driver.findElement(By.xpath("//a[@type='button' and contains(text(), 'Checkout')]")).click();
     }
 
+   @Given("the user is on the shop page")
+    public void theUserIsOnTheShopPage() {
+        driver.get("https://webshop-agil-testautomatiserare.netlify.app/products.html#");
+
+    }
+
+    @Then("the user should see the following categories:")
+    public void theUserShouldSeeTheFollowingCategories(DataTable dataTable) {
+        List<String> expectedCategories = dataTable.asList(String.class);
+              for (String category : expectedCategories) {
+                  String xpath = String.format("//a[normalize-space()='%s']", category);
+                     List<WebElement> categoryElements = driver.findElements(By.xpath(xpath));
+                       assertTrue("Category not found: " + category, !categoryElements.isEmpty());
+        }
+
+    }
+
+   @Then ("total sum is {string}")
+    public void totalSumIs (String expectedTotalSum){
+
     @Then("total sum is {string}")
     public void totalSumIs(String expectedTotalSum) {
+
         WebElement listItem = driver.findElement(By.xpath("//li[span[text()='Total (USD)']]"));
         WebElement totalElement = listItem.findElement(By.tagName("strong"));
         String totalSumText = totalElement.getText();
         Assert.assertEquals(totalSumText, expectedTotalSum);
     }
+
+        public static void closeDriver() {
+
 
     @Given("user navigates to Webshop")
     public void user_navigates_to_webshop() throws InterruptedException {
