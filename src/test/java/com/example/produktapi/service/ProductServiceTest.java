@@ -124,7 +124,7 @@ class ProductServiceTest {
         verify(productRepository, times(1)).findAll();
     }
 
-    void getAllCategories_ReturnsCorrectCategories() {
+    void getAllCategories_ReturnsCorrectCategories() {      //Ninis
         // Arrange
         List<String> expectedCategories = Arrays.asList("jewellery", "electronics", "clothing");
         when(productRepository.findAllCategories()).thenReturn(expectedCategories);
@@ -136,7 +136,7 @@ class ProductServiceTest {
         assertEquals(expectedCategories, actualCategories);
     }
 
-    @Test
+    @Test       //Ninis
     void getProductsByCategory_ReturnsCorrectProducts() {
         // Arrange
         Product product1 = new Product("Product 1", 100.0, "electronics", "Description 1", "image1.jpg");
