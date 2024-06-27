@@ -97,7 +97,7 @@ public class ProductTest {
         assertEquals(image, product.getImage());
     }
 
-    @Test
+    @Test       //Ninis
     void setImage_SetsCorrectImage() {
         Product product = new Product();
         String expectedImage = "image.jpg";
@@ -106,7 +106,7 @@ public class ProductTest {
         Assertions.assertEquals(expectedImage, actualImage);
     }
 
-    @Test
+    @Test       //Ninis
     void getImage_ReturnsCorrectImage() {
         Product product = new Product();
         assertNull(product.getImage(), "The image should be null when it is not set");
@@ -134,7 +134,7 @@ public class ProductTest {
         assertEquals(product.getPrice(), expectedPrice);
     }
 
-    @Test
+    @Test       //Ninis
     void getDescription_ReturnsCorrectDescription() {
         assertNull(product.getDescription(), "The description should be null when it is not set");
         String expectedDescription = "This is a product description";
@@ -143,7 +143,7 @@ public class ProductTest {
         assertEquals(expectedDescription, actualDescription);
     }
 
-    @Test
+    @Test       //Ninis
     void setDescription_SetsCorrectDescription() {
         String expectedDescription = "This is a product description";
         product.setDescription(expectedDescription);
