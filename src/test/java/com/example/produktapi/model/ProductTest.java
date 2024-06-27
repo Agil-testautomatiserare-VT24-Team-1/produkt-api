@@ -145,7 +145,7 @@ public class ProductTest {
         String actualDescription = product.getDescription();
         assertEquals(expectedDescription, actualDescription);
     }
-    
+
     @Test
     void setDescription_SetsCorrectDescription() {
         String expectedDescription = "This is a product description";
