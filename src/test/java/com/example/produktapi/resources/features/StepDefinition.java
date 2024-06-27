@@ -163,9 +163,6 @@ public class StepDefinition {
 
     }
 
-   @Then ("total sum is {string}")
-    public void totalSumIs (String expectedTotalSum){
-
     @Then("total sum is {string}")
     public void totalSumIs(String expectedTotalSum) {
 
@@ -175,9 +172,7 @@ public class StepDefinition {
         Assert.assertEquals(totalSumText, expectedTotalSum);
     }
 
-        public static void closeDriver() {
-
-
+//David Galstyan
     @Given("user navigates to Webshop")
     public void user_navigates_to_webshop() throws InterruptedException {
         Thread.sleep(2000);
@@ -186,6 +181,7 @@ public class StepDefinition {
         element.click();
     }
 
+    //David Galstyan
     @When("adding 2x'Mens Cotton Jacket' to the cart")
     public void adding_2x_mens_cotton_jacket_to_the_cart() throws InterruptedException {
         Thread.sleep(2000);
@@ -198,6 +194,7 @@ public class StepDefinition {
         element.click();
     }
 
+    //David Galstyan
     @When("navigating to Checkout")
     public void navigating_to_checkout() throws InterruptedException {
         WebElement element = driver.findElement(By.xpath("/html/body/header/div/div/div/a"));
@@ -206,6 +203,7 @@ public class StepDefinition {
         element.click();
     }
 
+    //David Galstyan
     @Then("there are 2x'Mens Cotton Jacket' in the cart costing {double} each")
     public void there_are_2x_mens_cotton_jacket_in_the_cart_costing_each(Double double1) throws InterruptedException {
         Thread.sleep(2000);
@@ -217,12 +215,14 @@ public class StepDefinition {
         Assertions.assertEquals("Mens Cotton Jacket", element.getText());
     }
 
+    //David Galstyan
     @Then("the total price is {string}")
     public void the_total_price_is(String stringPrice) {
         WebElement element = driver.findElement(By.xpath("//*[@id=\"cartList\"]/li[3]/strong"));
         Assertions.assertEquals(stringPrice, element.getText());
     }
 
+    //David Galstyan
     @Given("the user navigates to Shop")
     public void the_user_navigates_to_shop() {
         //find "Shop" and click
@@ -230,6 +230,7 @@ public class StepDefinition {
         element.click();
     }
 
+    //David Galstyan
     @When("showing all categories")
     public void showing_all_categories() throws InterruptedException {
         WebElement element = driver.findElement(By.xpath("/html/body/div[1]/div/ul/li[1]/a"));
@@ -237,6 +238,7 @@ public class StepDefinition {
         element.click();
     }
 
+    //David Galstyan
     @Then("there are {int} items listed")
     public void there_are_items_listed(Integer intCount) throws InterruptedException {
         Thread.sleep(2000);

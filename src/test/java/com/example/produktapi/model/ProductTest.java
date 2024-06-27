@@ -51,12 +51,15 @@ public class ProductTest {
         Assert.assertEquals(product.getTitle(), "Title");
     }
 
+    //David Galstyan
     @Test
     void getTitleNull(){
         String productTitle = null;
         product.setTitle(productTitle);
         assertNull(product.getTitle());
     }
+
+    //David Galstyan
     @Test
     void setTitle() {
         String productTitle = "Product title";
