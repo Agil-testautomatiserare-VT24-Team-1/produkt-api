@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ProductTest {
+public class ProductTest { 
     Product product;
 
     @BeforeEach
@@ -20,7 +20,7 @@ public class ProductTest {
     void tearDown() {
     }
 
-    @Test
+    @Test  
     void setIdTest() {
         Product theProduct = new Product();
         int id = 1;
@@ -29,7 +29,7 @@ public class ProductTest {
         assertEquals(id, actualId);
     }
 
-    @Test
+    @Test  //apurva
     void getId_ReturnsCorrectId() {
         Integer expectedId = 1;
         product.setId(expectedId);
@@ -37,7 +37,7 @@ public class ProductTest {
         assertEquals(expectedId, actualId);
     }
 
-    @Test
+    @Test //apurva
     void getId_ReturnsNullWhenIdNotSet() {
         Product product = new Product();
         Integer actualId = product.getId();
@@ -67,7 +67,7 @@ public class ProductTest {
         assertEquals(product.getTitle(), productTitle);
     }
 
-    @Test
+    @Test //apurva
     void getCategoryReturnsCorrectCategory() {
         String expectedCategory = "jewellery";
         Product product = new Product();
@@ -76,14 +76,14 @@ public class ProductTest {
         assertEquals(expectedCategory, actualCategory);
     }
 
-    @Test
+    @Test  //apurva
     void getCategoryReturnsNullWhenCategoryNotSet() {
         Product product = new Product();
         String actualCategory = product.getCategory();
         assertNull(actualCategory, "The category should be null when it is not set");
     }
 
-    @Test
+    @Test  //apurva
     public void testParameterizedConstructor() {
         // Arrange
         String title = "Test Product";
