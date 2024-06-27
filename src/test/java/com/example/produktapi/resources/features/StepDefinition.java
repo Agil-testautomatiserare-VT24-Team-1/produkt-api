@@ -4,20 +4,17 @@ package com.example.produktapi.resources.features;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-
-import org.junit.Assert;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import io.cucumber.datatable.DataTable;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,10 +23,18 @@ import java.util.List;
 
 
 
+import java.time.Duration;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
+
 public class StepDefinition {
 
     static WebDriver driver;
-   static WebDriverWait wait;
+    static WebDriverWait wait;
+
     @Before
     public static void setup() {
         ChromeOptions options = new ChromeOptions();
@@ -39,6 +44,14 @@ public class StepDefinition {
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    }
+
+    @AfterAll
+    public static void closeDriver() {
+
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
     @Given("webshop is available")
@@ -60,15 +73,13 @@ public class StepDefinition {
         assertEquals(expectedText, actualText);
     }
 
-
     @Then("webshop logo should be displayed")
     public void webshopLogoShouldBeDisplayed() {
 
-            WebElement logo = driver.findElement(By.xpath("//a[@class='d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none']/h1"));
-            boolean displayedlogo = logo.isDisplayed();
-            Assertions.assertTrue(displayedlogo, "The logo should be visible.");
-        }
-
+        WebElement logo = driver.findElement(By.xpath("//a[@class='d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none']/h1"));
+        boolean displayedlogo = logo.isDisplayed();
+        Assertions.assertTrue(displayedlogo, "The logo should be visible.");
+    }
 
     @When("user click on {string}")
     public void userClickOn(String arg0) throws InterruptedException {
@@ -95,19 +106,20 @@ public class StepDefinition {
     @Then("The {string} should visible")
     public void theShouldVisible(String arg0) throws InterruptedException {
         Thread.sleep(10000);
-    driver.findElement(By.xpath("//img[@src=\"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg\"]")).isDisplayed();
+        driver.findElement(By.xpath("//img[@src=\"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg\"]")).isDisplayed();
 
 
     }
 
     @Given("product page is available")
-    public void productPageIsAvailable() {   driver.get("https://webshop-agil-testautomatiserare.netlify.app/products");
+    public void productPageIsAvailable() {
+        driver.get("https://webshop-agil-testautomatiserare.netlify.app/products");
     }
 
     @When("for adding product in cart user  click on add to cart {string}")
     public void forAddingProductInCartUserClickOnAddToCart(String arg0) throws InterruptedException {
         Thread.sleep(10000);
-        WebElement xyz =driver.findElement(By.xpath("//*[@id=\"main\"]/div[1]/div/div/button"));
+        WebElement xyz = driver.findElement(By.xpath("//*[@id=\"main\"]/div[1]/div/div/button"));
         Actions actions = new Actions(driver);
         actions.moveToElement(xyz).perform();
 
@@ -134,8 +146,7 @@ public class StepDefinition {
         driver.findElement(By.xpath("//a[@type='button' and contains(text(), 'Checkout')]")).click();
     }
 
-
-    @Given("the user is on the shop page")
+   @Given("the user is on the shop page")
     public void theUserIsOnTheShopPage() {
         driver.get("https://webshop-agil-testautomatiserare.netlify.app/products.html#");
 
@@ -154,17 +165,118 @@ public class StepDefinition {
 
    @Then ("total sum is {string}")
     public void totalSumIs (String expectedTotalSum){
+
+    @Then("total sum is {string}")
+    public void totalSumIs(String expectedTotalSum) {
+
         WebElement listItem = driver.findElement(By.xpath("//li[span[text()='Total (USD)']]"));
         WebElement totalElement = listItem.findElement(By.tagName("strong"));
         String totalSumText = totalElement.getText();
         Assert.assertEquals(totalSumText, expectedTotalSum);
     }
 
-        @AfterAll
         public static void closeDriver() {
 
-            if (driver != null) {
-                driver.quit();
-            }
-        }
+
+    @Given("user navigates to Webshop")
+    public void user_navigates_to_webshop() throws InterruptedException {
+        Thread.sleep(2000);
+        //hitta och klicka "Webshop" knappen
+        WebElement element = driver.findElement(By.xpath("/html/body/header/div/div/ul/li[2]/a"));
+        element.click();
+    }
+
+    @When("adding 2x'Mens Cotton Jacket' to the cart")
+    public void adding_2x_mens_cotton_jacket_to_the_cart() throws InterruptedException {
+        Thread.sleep(2000);
+
+        WebElement element = driver.findElement(By.xpath("/html/body/main/div[3]/div/div/button"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
+        //lägg till två "Mens Cotton Jacket" i varukorgen genom att klicka på "Add to cart" knappen två gånger
+        element.click();
+        element.click();
+    }
+
+    @When("navigating to Checkout")
+    public void navigating_to_checkout() throws InterruptedException {
+        WebElement element = driver.findElement(By.xpath("/html/body/header/div/div/div/a"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
+        element.click();
+    }
+
+    @Then("there are 2x'Mens Cotton Jacket' in the cart costing {double} each")
+    public void there_are_2x_mens_cotton_jacket_in_the_cart_costing_each(Double double1) throws InterruptedException {
+        Thread.sleep(2000);
+        //Kontrollera namn på första artikeln
+        WebElement element = driver.findElement(By.xpath("//*[@id=\"cartList\"]/li[1]/div/h6"));
+        Assertions.assertEquals("Mens Cotton Jacket", element.getText());
+        //Kontrollera namn på andra artikeln
+        element = driver.findElement(By.xpath("//*[@id=\"cartList\"]/li[2]/div/h6"));
+        Assertions.assertEquals("Mens Cotton Jacket", element.getText());
+    }
+
+    @Then("the total price is {string}")
+    public void the_total_price_is(String stringPrice) {
+        WebElement element = driver.findElement(By.xpath("//*[@id=\"cartList\"]/li[3]/strong"));
+        Assertions.assertEquals(stringPrice, element.getText());
+    }
+
+    @Given("the user navigates to Shop")
+    public void the_user_navigates_to_shop() {
+        //find "Shop" and click
+        WebElement element = driver.findElement(By.xpath("/html/body/header/div/div/ul/li[2]/a"));
+        element.click();
+    }
+
+    @When("showing all categories")
+    public void showing_all_categories() throws InterruptedException {
+        WebElement element = driver.findElement(By.xpath("/html/body/div[1]/div/ul/li[1]/a"));
+        Thread.sleep(4000);
+        element.click();
+    }
+
+    @Then("there are {int} items listed")
+    public void there_are_items_listed(Integer intCount) throws InterruptedException {
+        Thread.sleep(2000);
+        List<WebElement> elements = driver.findElements(By.xpath("//div[@class='col']"));
+        assertEquals(intCount, elements.size());
+    }
+
+    @When("user search for {string}")       //Ninis
+    public void userSearchFor(String arg0) throws InterruptedException {
+        WebElement searchBox = driver.findElement(By.xpath("/html/body/div[1]/div/form/input"));
+//click on search box
+        searchBox.click();
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        String script = "var inputEvent = new Event('input', { 'bubbles': true, 'cancelable': true });" +
+                "arguments[0].value = arguments[1];" +
+                "arguments[0].dispatchEvent(inputEvent);" +
+                "var keydownEvent = new KeyboardEvent('keydown', { 'key': 'a', 'bubbles': true, 'cancelable': true });" +
+                "arguments[0].dispatchEvent(keydownEvent);";
+        js.executeScript(script, searchBox, "women");
+
+        Thread.sleep(1000);
+
+        Actions actions = new Actions(driver);
+        actions.sendKeys(Keys.BACK_SPACE).build().perform();
+    }
+
+    @Then("the search result should be displayed")      // NInis
+    public void theSearchResultShouldBeDisplayed() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20)); // wait for a maximum of 20 seconds
+
+        // Wait until at least one element that matches the xpath is present in the DOM
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='card h-100 p-3']")));
+
+        List<WebElement> elements = driver.findElements(By.xpath("//div[@class='card h-100 p-3']"));
+        assertFalse(elements.isEmpty(), "The search result should not be empty.");
+
+        //Print each element in the list
+        /*for (WebElement element : elements) {
+            System.out.println(element.getText());
+        }*/
+    }
 }

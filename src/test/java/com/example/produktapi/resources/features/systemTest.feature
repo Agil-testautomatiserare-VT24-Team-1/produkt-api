@@ -11,8 +11,8 @@ Feature: Page Loading
     Then The page contains "This shop is all you need" text
 
   Scenario: The logo is visible
-  Given webshop is available
-  Then webshop logo should be displayed
+    Given webshop is available
+    Then webshop logo should be displayed
 
   Scenario: product page is visible
     Given webshop is available
@@ -43,6 +43,13 @@ Feature: Page Loading
 
     
 
+  Scenario:
+    Given user navigates to Webshop
+    When adding 2x'Mens Cotton Jacket' to the cart
+    And navigating to Checkout
+    Then there are 2x'Mens Cotton Jacket' in the cart costing 55.99 each
+    And the total price is "$111.98"
+
   Scenario: multiple product is added in to the cart
     Given product page is available
     When  for adding product in cart user  click on add to cart "+Add to cart"
@@ -51,4 +58,22 @@ Feature: Page Loading
     #I cant get this When to work "headless". Not headless i works fine
     #When click the checkout button
     #Then total sum is "$219.90"
+
+
+
+
+  Scenario: There are 20 items in all category
+    Given the user navigates to Shop
+    When showing all categories
+    Then there are 20 items listed
+
+  Scenario: test search functionality     //Ninis
+    Given product page is available
+    When user search for "product"
+    Then the search result should be displayed
+
+  Scenario: checkout link in footer is clickable      //Ninis
+    Given webshop is available
+    When user click on "checkout"
+    Then "Checkout form page" should open
 
