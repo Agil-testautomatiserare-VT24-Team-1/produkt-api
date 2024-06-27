@@ -8,7 +8,8 @@ import org.junit.runner.RunWith;
 @CucumberContextConfiguration
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/java/com/example/produktapi/resources/features")
-public class RunCucumberTest {
+public class
+RunCucumberTest {
 
 }
 
