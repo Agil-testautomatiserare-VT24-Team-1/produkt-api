@@ -41,6 +41,7 @@ public class StepDefinition {
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--headless");
+        options.addArguments("--window-size=1920,1080");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -139,6 +140,7 @@ public class StepDefinition {
             Assertions.fail("Quantity text is not a valid integer: " + quantityText);
         }
     }
+
 
     @When("click the checkout button") //apurva
     public void clickTheCheckoutButton() throws InterruptedException {
