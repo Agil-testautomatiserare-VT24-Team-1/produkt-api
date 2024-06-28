@@ -35,12 +35,14 @@ public class StepDefinition {
     static WebDriver driver;
     static WebDriverWait wait;
 
+    //Göran Ahlgren
     @Before
     public static void setup() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--headless");
+        options.addArguments("--window-size=1920,1080");
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -140,12 +142,14 @@ public class StepDefinition {
         }
     }
 
+    //Göran Ahlgren
     @When("click the checkout button") //apurva
     public void clickTheCheckoutButton() throws InterruptedException {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@type='button' and contains(text(), 'Checkout')]")));
         driver.findElement(By.xpath("//a[@type='button' and contains(text(), 'Checkout')]")).click();
     }
 
+    //Göran Ahlgren
     @Then("check the quantity in the checkout button {string}")
     public void checkTheQuantityInTheCheckoutButton(String checkoutNumber) throws InterruptedException {
         WebElement checkoutButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"buttonSize\"]")));
