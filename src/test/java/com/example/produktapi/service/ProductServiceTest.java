@@ -42,7 +42,7 @@ class ProductServiceTest {
         closeable.close();
     }
 
-    @Test
+    @Test   // Apurva
     void getProductByIdSuccess() {
         Product product = new Product(
                 "jewellery",
@@ -59,7 +59,7 @@ class ProductServiceTest {
         assertEquals(productById.getTitle(), "jewellery");
     }
 
-    @Test
+    @Test  // apurva
     void getProductByIdNegative() {
         when(productRepository.findById(any())).thenReturn(Optional.empty());
         // Asserting that getProductById() method throws EntityNotFoundException
@@ -68,32 +68,32 @@ class ProductServiceTest {
         });
     }
 
-    @Test
+    @Test // apurva
     void addProduct_ProductDoesNotExist_SavesProduct() {
-        // Arrange
+       
         when(productRepository.findByTitle(any())).thenReturn(Optional.empty());
 
         Product newProduct = new Product("2", 200.0, "jewellery", "New Title", "image");
         when(productRepository.save(any(Product.class))).thenReturn(newProduct);
 
-        // Act
+        
         Product savedProduct = productService.addProduct(newProduct);
 
-        // Assert
+        
         assertNotNull(savedProduct);
         assertEquals("2", savedProduct.getTitle());
         assertEquals(200.0, savedProduct.getPrice());
     }
 
-    @Test
+    @Test //apurva
     void addProduct_ProductAlreadyExists_ThrowsBadRequestException() {
-        // Arrange
+       
         Product existingProduct = new Product("1", 100.0, "jewellery", "Existing Title", "image");
         when(productRepository.findByTitle(any())).thenReturn(Optional.of(existingProduct));
 
         Product newProduct = new Product("2", 200.0, "jewellery", "Existing Title", "image");
 
-        // Act & Assert
+        
         BadRequestException exception = assertThrows(BadRequestException.class, () -> {
             productService.addProduct(newProduct);
         });
@@ -101,7 +101,7 @@ class ProductServiceTest {
         assertEquals("En produkt med titeln: 2 finns redan", exception.getMessage());
     }
 
-    @Test
+    @Test //apurva
     void testGetAllProducts() {
         Product product1;
         Product product2;
