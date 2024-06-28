@@ -50,14 +50,14 @@ Feature: Page Loading
     Then there are 2x'Mens Cotton Jacket' in the cart costing 55.99 each
     And the total price is "$111.98"
 
+  #Göran Ahlgren
   Scenario: multiple product is added in to the cart
     Given product page is available
     When  for adding product in cart user  click on add to cart "+Add to cart"
     When  for adding product in cart user  click on add to cart "+Add to cart"
     Then check the quantity in the checkout button "2"
-    #I cant get this When to work "headless". Not headless i works fine
-    #When click the checkout button
-    #Then total sum is "$219.90"
+    When click the checkout button
+    Then total sum is "$219.90"
 
 
 
