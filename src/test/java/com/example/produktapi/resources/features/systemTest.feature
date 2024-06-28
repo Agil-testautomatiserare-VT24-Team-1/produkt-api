@@ -50,7 +50,7 @@ Feature: Page Loading
     Then there are 2x'Mens Cotton Jacket' in the cart costing 55.99 each
     And the total price is "$111.98"
 
-  //Göran Ahlgren
+  #Göran Ahlgren
   Scenario: multiple product is added in to the cart
     Given product page is available
     When  for adding product in cart user  click on add to cart "+Add to cart"
