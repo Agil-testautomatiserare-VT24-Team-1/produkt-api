@@ -142,6 +142,7 @@ public class StepDefinition {
         }
     }
 
+
     //Göran Ahlgren
     @When("click the checkout button") //apurva
     public void clickTheCheckoutButton() throws InterruptedException {
